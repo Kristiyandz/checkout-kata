@@ -1,0 +1,18 @@
+{
+    "Prices":{
+       "A":50,
+       "B":30,
+       "C":20,
+       "D":15
+    },
+    "SpecialPrices":{
+       "A":{
+          "Count":3,
+          "SpecialTotal":130
+       },
+       "B":{
+          "Count":2,
+          "SpecialTotal":45
+       }
+    }
+ }
