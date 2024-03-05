@@ -37,7 +37,7 @@ The above commands can abstracted away in a local `bash` script or a `Make` file
 
 ## Data
 
-The data and the rules for the application is read from a local files but they can be any other external sources - api, cache, CDN etc.
+The data and the rules for the application are read from local files, but they can come fom other external sources - api, cache, CDN etc.
 
 ## Rules
 The checkout is implemented to be agnostic of the rules and to accept these rules as arguments. \
