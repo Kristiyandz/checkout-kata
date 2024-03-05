@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/Kristiyandz/checkout-kata/checkout"
 	"github.com/Kristiyandz/checkout-kata/model"
 )
 
@@ -31,7 +32,15 @@ func main() {
 		log.Fatalf("Failed to unamrshal rules: %s", err)
 	}
 
-	fmt.Println(pricingRules)
+	newCheckout := checkout.InitNewCheckout(pricingRules)
 
-	fmt.Println("Hello World!")
+	newCheckout.Scan("A")
+	newCheckout.Scan("B")
+	newCheckout.Scan("A")
+	newCheckout.Scan("A")
+	newCheckout.Scan("B")
+	newCheckout.Scan("C")
+	newCheckout.Scan("D")
+
+	fmt.Println("Total price: ", newCheckout.GetTotalPrice())
 }
