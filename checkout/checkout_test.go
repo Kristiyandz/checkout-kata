@@ -1,9 +1,9 @@
 package checkout_test
 
 import (
-	"fmt"
 	"testing"
 
+	"github.com/Kristiyandz/checkout-kata/checkout"
 	"github.com/Kristiyandz/checkout-kata/model"
 )
 
@@ -27,13 +27,17 @@ func TestGetTotalPrices(t *testing.T) {
 		},
 	}
 
-	fmt.Println(testPricingRules)
+	newCheckout := checkout.InitNewCheckout(testPricingRules)
 
-	// @TODO init new checkout
-	// @TODO scan items
+	newCheckout.Scan("A")
+	newCheckout.Scan("B")
+	newCheckout.Scan("A")
+	newCheckout.Scan("A") // triggers special price because it is the second occurrence of A as per the rules
+	newCheckout.Scan("B") // trigger special price because it is the second occurrence of B as per the rules
+	newCheckout.Scan("C")
 
-	expectedTotal := 0
-	actualTotal := 0
+	expectedTotal := 130 + 45 + 20 // Special price for A and B + price for C
+	actualTotal := 195             // this will become newCheckout.GetTotalPrice()
 
 	if actualTotal != expectedTotal {
 		t.Errorf("GetTotalPrice() = %d; want '%d'", actualTotal, expectedTotal)
