@@ -37,7 +37,7 @@ func TestGetTotalPrices(t *testing.T) {
 	newCheckout.Scan("C")
 
 	expectedTotal := 130 + 45 + 20 // Special price for A and B + price for C
-	actualTotal := 195             // this will become newCheckout.GetTotalPrice()
+	actualTotal := newCheckout.GetTotalPrice()
 
 	if actualTotal != expectedTotal {
 		t.Errorf("GetTotalPrice() = %d; want '%d'", actualTotal, expectedTotal)

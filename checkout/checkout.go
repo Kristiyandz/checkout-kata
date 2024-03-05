@@ -1,7 +1,6 @@
 package checkout
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/Kristiyandz/checkout-kata/model"
@@ -39,6 +38,23 @@ func (c *CheckoutBasket) Scan(itemSKU string) {
 
 // gets the total price
 func (c *CheckoutBasket) GetTotalPrice() int {
-	fmt.Println("Getting total value")
-	return 0
+	totalPrice := 0
+	itemCounts := make(map[string]int)
+
+	for _, item := range c.items {
+		itemCounts[item.SKU]++
+	}
+
+	for sku, count := range itemCounts {
+		if specalPrice, exists := c.pricingRules.SpecialPrices[sku]; exists {
+			bundles := count / specalPrice.Count
+			remainder := count % specalPrice.Count
+
+			totalPrice += (bundles * specalPrice.SpecialTotal) + (remainder * c.pricingRules.Prices[sku])
+		} else {
+			totalPrice += count * c.pricingRules.Prices[sku]
+		}
+	}
+
+	return totalPrice
 }
